@@ -14,6 +14,7 @@
             <p>GYM MANAGEMENT</p>
             <div class="navLinks">
                 <p><a href="../home/index.html">Trang chủ</a></p>
+                <p id="user_name"></p>
                 <p>Lịch tập</p>
             </div>
         </div>
@@ -21,7 +22,7 @@
 
     <div class="container">
         <h2>Quản lý lịch tập</h2>
-        <button onclick="showForm()">Đặt lịch mới</button>
+        <button id="booking" onclick="showForm()">Đặt lịch mới</button>
         <div class="list">
             <table>
                 <thead>
@@ -31,17 +32,21 @@
                         <th>Khung giờ</th>
                         <th>Họ tên</th>
                         <th>Email</th>
-                        <th>Thao tác</th>
+                        <th colspan="2">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
+                    
                     <!-- Dữ liệu sẽ được thêm vào đây -->
                 </tbody>
             </table>
         </div>
+        <footer>
+            
+        </footer>
     </div>
     <div id="overlay">
-        <form onsubmit="test(event)" id="buttonId">
+        <form id="buttonId">
             <h3>Đặt lịch mới</h3>
             <label for="class">Lớp học</label>
             <select id="class">
@@ -64,11 +69,11 @@
             <label for="email">Email</label>
             <input type="email" id="email" required>
             <div style="display: flex; gap: 12px; justify-content: flex-end;">
-                <button type="button" onclick="test2(event)">Hủy</button>
-                <button type="submit">Lưu</button>
+                <button onclick="hide_form()">Hủy</button>
+                <button onclick="inputDatabase(event)">Lưu</button>
             </div>
         </form>
-    </div>    
+    </div>
     <script src="main.js"></script>
 </body>
 

@@ -62,7 +62,7 @@ a {
   color: #000;
 }
 
-.container button {
+#booking {
   background-color: #2d8cf0;
   color: white;
   border: none;
@@ -103,10 +103,23 @@ table th {
   text-align: center;
 }
 
+button{
+  background-color: #2d8cf0;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin:10px;
+}
+
 table td {
   padding: 14px 12px;
   font-size: 14px;
   color: #333;
+}
+
+footer{
+  text-align: center;
 }
 
 /* Overlay nền xám mờ */
@@ -160,7 +173,3 @@ table td {
   color: white;
 }
 
-#buttonId button[type="button"] {
-  background-color: #f5f5f5;
-  color: black;
-}

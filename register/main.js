@@ -17,11 +17,12 @@ function check_register(event){
                 email: email,
                 password: password,
                 status: "user",
+                class_user:[]
             }
             account.push(user);
             save_local();
             alert("Register success!");
-            window.location.href = "../home/index.html";
+            window.location.href = "../loggin/index.html";
         }
         else{
             alert("Password must be 8 characters long!");
