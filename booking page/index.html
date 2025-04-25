@@ -20,7 +20,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container" id ="form_table">
         <h2>Quản lý lịch tập</h2>
         <button id="booking" onclick="showForm()">Đặt lịch mới</button>
         <div class="list">
@@ -45,11 +45,11 @@
             
         </footer>
     </div>
-    <div id="overlay">
+    <div id="overlay" style="display: none">
         <form id="buttonId">
             <h3>Đặt lịch mới</h3>
             <label for="class">Lớp học</label>
-            <select id="class">
+            <select id="class" required>
                 <option>Chọn lớp học</option>
                 <option value="Gym">Gym</option>
                 <option value="Yoga">Yoga</option>
@@ -58,7 +58,7 @@
             <label for="date">Ngày tập</label>
             <input type="date" id="date" required>
             <label for="time">Khung giờ</label>
-            <select id="time">
+            <select id="time" required>
                 <option>Chọn khung giờ</option>
                 <option value="6h-7h">6h-7h</option>
                 <option value="7h-8h">7h-8h</option>
@@ -69,11 +69,21 @@
             <label for="email">Email</label>
             <input type="email" id="email" required>
             <div style="display: flex; gap: 12px; justify-content: flex-end;">
-                <button onclick="hide_form()">Hủy</button>
-                <button onclick="inputDatabase(event)">Lưu</button>
+                <button onclick="hide_form(event)">Hủy</button>
+                <button id="change" onclick="inputDatabase(event)">Lưu</button>
             </div>
         </form>
     </div>
+    <div id="modal_overlay" class="overlay" style="display: none">
+        <div class="modal_delete">
+          <p>Bạn có muốn xóa ?</p>
+          <div id="btn">
+            <button onclick="hideDelete()">Hủy</button>
+            <button onclick="delete_index()">Có</button>
+          </div>
+        </div>
+      </div>
+      
     <script src="main.js"></script>
 </body>
 
