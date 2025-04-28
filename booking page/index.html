@@ -46,7 +46,7 @@
         </footer>
     </div>
     <div id="overlay" style="display: none">
-        <form id="buttonId">
+        <form id="buttonId" onsubmit="inputDatabase(event)">
             <h3>Đặt lịch mới</h3>
             <label for="class">Lớp học</label>
             <select id="class" required>
@@ -70,7 +70,7 @@
             <input type="email" id="email" required>
             <div style="display: flex; gap: 12px; justify-content: flex-end;">
                 <button onclick="hide_form(event)">Hủy</button>
-                <button id="change" onclick="inputDatabase(event)">Lưu</button>
+                <button type="submit" id="change">Lưu</button>
             </div>
         </form>
     </div>

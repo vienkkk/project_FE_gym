@@ -9,12 +9,21 @@
 <body>
     <div class="admin-layout">
         <div class="sidebar">
-            Admin Dashboard
-            <div class="navLinks">Quản lí lịch</div>
-            <div class="navLinks">Quản lí dịch vụ</div>
-            <div class="navLinks">Trang chủ</div>
-            <div class="logout">Đăng xuất</div>
+            <div class="sidebar-top">
+                Admin Dashboard
+                <a href="../admin_service/index.html">
+                    <div class="navLinks">Quản lí lịch</div>
+                </a>
+                <a href="../admin_statistics/index.html">
+                    <div class="navLinks">Quản lí dịch vụ</div>
+                </a>
+                <a href="/home/index.html">
+                    <div class="navLinks">Trang chủ</div>
+                </a>
+                <div class="logout">Đăng xuất</div>
+            </div>
         </div>
+        
         <div class="container">
             <h2>Thống kê lịch tập</h2>
             <div class="grid">
@@ -30,7 +39,11 @@
                 <p>0</p>
             </div>
         </div>
-    </div>
+        <div class="grid-total">
+            <div class="total_gym"></div>
+            <div class="total_yoga"></div>
+            <div class="total_zumba"></div>
+        </div>
     <script src="main.js"></script>
 </body>
 </html>

@@ -1,0 +1,68 @@
+/* Reset cơ bản */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body tổng */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+}
+
+/* Bố cục admin layout */
+.admin-layout {
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background-color: #0f172a;
+    color: white;
+    height: 100vh;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.sidebar-top {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.navLinks {
+    background-color: transparent;
+    padding: 10px;
+    cursor: pointer;
+    color: #cbd5e1;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.navLinks:hover {
+    background-color: #1e293b;
+}
+.navLinks::after {
+    background-color: green; /* Đổi màu nền khi nhấn */
+    color: white; /* Đổi màu chữ khi nhấn */
+}
+a{
+    color:#cbd5e1;
+    text-decoration: none;
+}
+.logout {
+    color: #f43f5e;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.logout:hover {
+    background-color: #1e293b;
+}

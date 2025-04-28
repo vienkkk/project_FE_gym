@@ -11,6 +11,7 @@ if (!isAdminExists) {
     email: "admin@gmail.com",
     password: "admin123",
     status: "admin",
+    class_user:[]
   });
 
   localStorage.setItem("account", JSON.stringify(account));

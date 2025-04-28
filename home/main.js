@@ -3,9 +3,9 @@ let index = localStorage.getItem("index")
 function logout() {
     let loggedIn = localStorage.getItem("loggedIn");
     if (loggedIn) {
-        localStorage.setItem("loggedIn", "false"); // Set loggedIn to false
+        localStorage.setItem("loggedIn", "false"); 
         alert("You have been logged out successfully!");
-        window.location.href = "../loggin/index.html"; // Redirect to login page after logout
+        window.location.href = "../loggin/index.html"; 
     } else {
         alert("You are not logged in!");
     }
@@ -21,8 +21,16 @@ function check_login() {
             let remote_admin = document.createElement("p")
             remote_admin.innerText="Quản lí Admin"   
             navLinks[0].appendChild(remote_admin);
-            navLinks[0].addEventListener("click",()=>{
-                window.location.href = "../admin/index.html"
+            remote_admin.addEventListener("click",()=>{
+                window.location.href = "../admin/admin_statistics/index.html"
+            })
+        }
+        if(account[index].status=="user"){
+            let booked = document.createElement("p")
+            booked.innerText="Lịch đã đặt"
+            navLinks[0].appendChild(booked);
+            booked.addEventListener("click",()=>{
+                window.location.href = "../booking page/index.html"
             })
         }
     } else {

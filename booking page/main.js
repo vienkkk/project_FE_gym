@@ -6,18 +6,24 @@ function showForm() {
   const overlay = document.getElementById("overlay");
   overlay.style.display = "flex";
   overlay.style.justifyContent = "center";
-  overlay.style.zIndex="999"
+  overlay.style.zIndex = "999";
+
+  document.getElementById("buttonId").reset(); 
+  document.getElementById("change").innerText = "Lưu"; 
+  find = false; 
 }
+
 
 let find = false;
 
 function inputDatabase(event) {
   event.preventDefault();
-  let class_gym = document.getElementById("class").value.trim()
-  let date = document.getElementById("date").value.trim()
-  let time = document.getElementById("time").value.trim()
-  let name = document.getElementById("name").value.trim()
-  let email = document.getElementById("email").value.trim()
+  
+  let class_gym = document.getElementById("class").value.trim();
+  let date = document.getElementById("date").value.trim();
+  let time = document.getElementById("time").value.trim();
+  let name = document.getElementById("name").value.trim();
+  let email = document.getElementById("email").value.trim();
   
   let class_user = {
     class_gym: class_gym,
@@ -29,23 +35,32 @@ function inputDatabase(event) {
   
   if (find) {
     account[index].class_user[index_class] = class_user;
+    find = false;
   } else {
+    
     if (class_gym === "" || date === "" || time === "" || name === "" || email === "") {
       alert("Dữ liệu không được bỏ trống, hãy nhập cho đầy đủ!");
       return;
     }
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Email không đúng định dạng, vui lòng kiểm tra lại!");
+      return;
+    }
+
     if (account[index].class_user.some(user => user.email === email || (user.name === name && user.time === time))) {
       alert("Email hoặc tên với khung giờ này đã tồn tại. Vui lòng kiểm tra lại!");
       return;
     }
+
     account[index].class_user.push(class_user);
   }
 
   localStorage.setItem("account", JSON.stringify(account));
   renderData(account[index].class_user);
   document.getElementById("overlay").style.display = "none";
-  
 }
+
 
 function hide_form(event) {
   event.preventDefault();
@@ -106,7 +121,7 @@ function editEl(i) {
 
   find = true;
   index_class = i;
-
+  
   document.getElementById("change").innerText = "Lưu chỉnh sửa";
 }
 
@@ -130,3 +145,11 @@ function renderData(arr) {
     tbody.appendChild(tr);
   });
 }
+function check_login() {
+    let loggedIn = localStorage.getItem("loggedIn");
+    if (loggedIn === "false") {
+        localStorage.setItem("loggedIn", "false");
+        window.location.href = "../loggin/index.html"; 
+    }
+}
+check_login();

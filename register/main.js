@@ -19,10 +19,16 @@ function check_register(event){
                 status: "user",
                 class_user:[]
             }
-            account.push(user);
-            save_local();
-            alert("Register success!");
-            window.location.href = "../loggin/index.html";
+            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+              alert("Email không đúng định dạng, vui lòng kiểm tra lại!");
+              return;
+            }else{
+                account.push(user);
+                save_local();
+                alert("Register success!");
+                window.location.href = "../loggin/index.html";
+            }
         }
         else{
             alert("Password must be 8 characters long!");
