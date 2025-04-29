@@ -5,7 +5,7 @@ function check_admin(){
         window.location.href = "/home/index.html"; 
     }
 }
-check_admin()
+
 
 function check_login() {
     let loggedIn = localStorage.getItem("loggedIn");
@@ -14,4 +14,5 @@ function check_login() {
         window.location.href = "/loggin/index.html"; 
     }
 }
+check_admin()
 check_login();
