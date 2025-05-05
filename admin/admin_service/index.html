@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Quản lý Dịch vụ</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,27 +23,47 @@
                 <div class="logout">Đăng xuất</div>
             </div>
         </div>
-        
-        <div class="container">
+        <div class="main-content">
             <h2>Thống kê lịch tập</h2>
-            <div class="grid">
-                <h3>Tổng số lịch gym</h3>
-                <p>0</p>
+            <div class="stats-cards">
+                <div class="stat-card">Tổng số lịch Gym<br><span class="stat-gym">0</span></div>
+                <div class="stat-card">Tổng số lịch Yoga<br><span class="stat-yoga">0</span></div>
+                <div class="stat-card">Tổng số lịch Zumba<br><span class="stat-zumba">0</span></div>
             </div>
-            <div class="grid">
-                <h3>Tổng số lịch Yoga</h3>
-                <p>0</p>
+            <div class="chart-placeholder">
+                <!-- Biểu đồ sẽ được tích hợp ở đây -->
+                
             </div>
-            <div class="grid">
-                <h3>Tổng số lịch Zumba</h3>
-                <p>0</p>
+            <div class="filter-section">
+                <select>
+                    <option>Tất cả</option>
+                    <option>Gym</option>
+                    <option>Yoga</option>
+                    <option>Zumba</option>
+                </select>
+                <input type="text" placeholder="Tìm theo email">
+                <input type="date">
             </div>
-        </div>
-        <div class="grid-total">
-            <div class="total_gym"></div>
-            <div class="total_yoga"></div>
-            <div class="total_zumba"></div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Lớp học</th>
+                        <th>Ngày tập</th>
+                        <th>Khung giờ</th>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
         </div>
     <script src="main.js"></script>
 </body>
 </html>
+
+
+
+
