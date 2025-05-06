@@ -1,122 +1,111 @@
-let account = JSON.parse(localStorage.getItem("account")) || [];
-let index = localStorage.getItem("index");
-
-function check_admin() {
-    if (account[index].status !== "admin") {
-        window.location.href = "/home/index.html"; 
-    }
-}
-
-function check_login() {
-    let loggedIn = localStorage.getItem("loggedIn");
-    if (loggedIn === "false") {
-        localStorage.setItem("loggedIn", "false");
-        window.location.href = "/loggin/index.html"; 
-    }
-}
-
-if (!localStorage.getItem("services")) {
-    localStorage.setItem("services", JSON.stringify(services));
-}
-
-function change_content(content){
-    if(content === "Gym"){
-        return "Tập luyện với các thiết bị hiện đại";
-    }
-    if(content === "Yoga"){
-        return "Thư giãn và cân bằng tâm tri";
-    }
-    if(content === "Zumba"){
-        return "Đốt cháy calories với những điệu nhảy sôi động";
-
-    }
-}
+let selectedServiceIndex = null;
+let isEditing = false;
 
 function renderData() {
     const services = JSON.parse(localStorage.getItem("services")) || [];
     const tbody = document.querySelector(".service-table tbody");
-    
-    tbody.innerHTML = ""; 
-    
+    tbody.innerHTML = "";
+  
     services.forEach((service, index) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${service.name}</td>
-            <td>${change_content(service.name)}</td>
-            <td><img src="${service.name}.jpg" width="50"></td>
-            <td>
-                <button class="edit-btn" data-index="${index}">Sửa</button>
-            </td>
-            <td>
-                <button class="delete-btn" data-index="${index}">Xóa</button>
-            </td>
-        `;
-        
-        tbody.appendChild(row);
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${service.name}</td>
+        <td>${service.description}</td>
+        <td><img src="${service.image || 'https://via.placeholder.com/50'}" width="50" height="50" alt="${service.name}"></td>
+        <td><button class="edit-btn" data-index="${index}">Sửa</button></td>
+        <td><button class="delete-btn" data-index="${index}">Xóa</button></td>
+      `;
+      tbody.appendChild(row);
     });
-    
-    document.querySelectorAll(".edit-btn").forEach(btn => {
-        btn.addEventListener("click", editService);
-    });
-    
-    document.querySelectorAll(".delete-btn").forEach(btn => {
-        btn.addEventListener("click", deleteService);
-    });
+  
+    // Phần còn lại giữ nguyên
+    document.querySelectorAll(".edit-btn").forEach(btn =>
+      btn.addEventListener("click", openEditModal)
+    );
+    document.querySelectorAll(".delete-btn").forEach(btn =>
+      btn.addEventListener("click", openDeleteModal)
+    );
+  }
+
+function openAddModal() {
+  isEditing = false;
+  selectedServiceIndex = null;
+  document.querySelector(".modal-title").innerText = "Thêm dịch vụ mới";
+  document.getElementById("serviceName").value = "";
+  document.getElementById("serviceDesc").value = "";
+  document.getElementById("serviceImage").value = "";
+  document.querySelector(".service-modal").classList.remove("hidden");
 }
 
-function addNewService() {
-    const name = prompt("Nhập tên dịch vụ:");
-    if (!name) return;
-    
-    const description = prompt("Nhập mô tả dịch vụ:");
-    const image = prompt("Nhập URL hình ảnh (nếu có):");
-    
-    const services = JSON.parse(localStorage.getItem("services")) || [];
-    services.push({
-        name,
-        description: description || "",
-        image: image || ""
-    });
-    
-    localStorage.setItem("services", JSON.stringify(services));
-    renderData();
+function openEditModal(e) {
+  isEditing = true;
+  selectedServiceIndex = e.target.getAttribute("data-index");
+  const services = JSON.parse(localStorage.getItem("services")) || [];
+  const service = services[selectedServiceIndex];
+
+  document.querySelector(".modal-title").innerText = "Sửa dịch vụ";
+  document.getElementById("serviceName").value = service.name;
+  document.getElementById("serviceDesc").value = service.description;
+  document.getElementById("serviceImage").value = service.image || "";
+
+  document.querySelector(".service-modal").classList.remove("hidden");
 }
 
-function editService(e) {
-    const index = e.target.getAttribute("data-index");
-    const services = JSON.parse(localStorage.getItem("services"));
-    const service = services[index];
-    
-    const name = prompt("Nhập tên dịch vụ:", service.name);
-    if (name === null) return;
-    
-    const description = prompt("Nhập mô tả dịch vụ:", service.description);
-    
-    services[index] = {
-        name: name || service.name,
-        description: description || service.description,
-        image: image || service.image
-    };
-    
-    localStorage.setItem("services", JSON.stringify(services));
-    renderData();
+function saveService() {
+  const name = document.getElementById("serviceName").value.trim();
+  const description = document.getElementById("serviceDesc").value.trim();
+  const image = document.getElementById("serviceImage").value.trim();
+
+  if (!name || !description) {
+    alert("Vui lòng điền đầy đủ thông tin!");
+    return;
+  }
+
+  const services = JSON.parse(localStorage.getItem("services")) || [];
+
+  if (isEditing) {
+    services[selectedServiceIndex] = { name, description, image };
+  } else {
+    services.push({ name, description, image });
+  }
+
+  localStorage.setItem("services", JSON.stringify(services));
+  document.querySelector(".service-modal").classList.add("hidden");
+  renderData();
 }
 
-function deleteService(e) {
-    const index = e.target.getAttribute("data-index");
-    if (confirm("Bạn có chắc chắn muốn xóa dịch vụ này?")) {
-        const services = JSON.parse(localStorage.getItem("services"));
-        services.splice(index, 1);
-        localStorage.setItem("services", JSON.stringify(services));
-        renderData();
-    }
+function openDeleteModal(e) {
+  selectedServiceIndex = e.target.getAttribute("data-index");
+  document.querySelector(".confirm-modal").classList.remove("hidden");
 }
 
-function init() {
-    check_admin();
-    check_login();
-    renderData();
-    document.querySelector(".add-btn").addEventListener("click", addNewService);
+function confirmDelete() {
+  const services = JSON.parse(localStorage.getItem("services")) || [];
+  services.splice(selectedServiceIndex, 1);
+  localStorage.setItem("services", JSON.stringify(services));
+  document.querySelector(".confirm-modal").classList.add("hidden");
+  renderData();
 }
 
-init();
+function closeModals() {
+  document.querySelectorAll(".modal").forEach(modal => modal.classList.add("hidden"));
+}
+
+document.querySelector(".add-btn").addEventListener("click", openAddModal);
+document.getElementById("saveServiceBtn").addEventListener("click", saveService);
+document.getElementById("confirmDelete").addEventListener("click", confirmDelete);
+document.querySelectorAll(".close-modal").forEach(btn =>
+  btn.addEventListener("click", closeModals)
+);
+function logout() {
+  let loggedIn = localStorage.getItem("loggedIn");
+  if (loggedIn) {
+      localStorage.setItem("loggedIn", "false"); 
+      alert("You have been logged out successfully!");
+      window.location.href = "/loggin/index.html"; 
+  } else {
+      alert("You are not logged in!");
+  }
+}
+// Khởi tạo dữ liệu ban đầu
+renderData();

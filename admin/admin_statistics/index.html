@@ -1,54 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý Dịch vụ</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quản lý Dịch vụ</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="admin-layout">
-        <div class="sidebar">
-            <div class="sidebar-top">
-                Admin Dashboard
-                <a href="../admin_service/index.html">
-                    <div class="navLinks">Quản lí lịch</div>
-                </a>
-                <a href="../admin_statistics/index.html">
-                    <div class="navLinks active">Quản lí dịch vụ</div>
-                </a>
-                <a href="/home/index.html">
-                    <div class="navLinks">Trang chủ</div>
-                </a>
-                <div class="logout">Đăng xuất</div>
-            </div>
-        </div>
-    
-        <div class="main-content">
-            <div class="header">
-                <h2>Quản lý Dịch vụ</h2>
-                <button class="add-btn">Thêm dịch vụ mới</button>
-            </div>
-            <table class="service-table">
-                <thead>
-                    <tr>
-                        <th>Tên dịch vụ</th>
-                        <th>Mô tả</th>
-                        <th>Hình ảnh</th>
-                        <th colspan="2">Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dữ liệu sẽ được thêm ở đây -->
-                </tbody>
-            </table>
-        </div>
+  <div class="admin-layout">
+    <div class="sidebar">
+      <div class="sidebar-top">
+        Admin Dashboard
+        <a href="../admin_service/index.html">
+          <div class="navLinks">Quản lí lịch</div>
+        </a>
+        <a href="../admin_statistics/index.html">
+          <div class="navLinks active">Quản lí dịch vụ</div>
+        </a>
+        <a href="/home/index.html">
+          <div class="navLinks">Trang chủ</div>
+        </a>
+        <div class="logout" onclick="logout()">Đăng xuất</div>
+      </div>
     </div>
-    
-    <script src="main.js"></script>
+
+    <div class="main-content">
+      <div class="header">
+        <h2>Quản lý Dịch vụ</h2>
+        <button class="add-btn">Thêm dịch vụ mới</button>
+      </div>
+      <table class="service-table">
+        <thead>
+          <tr>
+            <th>Tên dịch vụ</th>
+            <th>Mô tả</th>
+            <th>Hình ảnh</th>
+            <th colspan="2">Thao tác</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal Thêm/Sửa -->
+  <div class="modal service-modal hidden">
+    <div class="modal-content">
+      <h3 class="modal-title">Thêm dịch vụ mới</h3>
+      <input type="text" id="serviceName" placeholder="Tên dịch vụ" />
+      <textarea id="serviceDesc" placeholder="Mô tả dịch vụ"></textarea>
+      <input type="text" id="serviceImage" placeholder="Đường link online" />
+      <div class="modal-actions">
+        <button id="saveServiceBtn">Lưu</button>
+        <button class="close-modal">Hủy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Xác nhận Xóa -->
+  <div class="modal confirm-modal hidden">
+    <div class="modal-content">
+      <p>Bạn có chắc chắn muốn xóa dịch vụ này không?</p>
+      <div class="modal-actions">
+        <button id="confirmDelete">Xóa</button>
+        <button class="close-modal">Hủy</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
-
-
-
-

@@ -1,22 +1,30 @@
-/* Reset cơ bản */
+/* ===== BASE & RESET ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body tổng */
 body {
     font-family: Arial, sans-serif;
     background-color: #1e1e1e;
 }
 
-/* Bố cục admin layout */
+a {
+    color: #cbd5e1;
+    text-decoration: none;
+}
+
+::placeholder {
+    color: #999;
+    opacity: 1;
+}
+
+/* ===== LAYOUT ===== */
 .admin-layout {
     display: flex;
 }
 
-/* Sidebar */
 .sidebar {
     width: 220px;
     background-color: #0f172a;
@@ -29,6 +37,14 @@ body {
     font-weight: bold;
 }
 
+.main-content {
+    flex: 1;
+    background-color: #f8fafc;
+    padding: 30px;
+    min-height: 100vh;
+}
+
+/* ===== SIDEBAR COMPONENTS ===== */
 .sidebar-top {
     display: flex;
     flex-direction: column;
@@ -44,26 +60,23 @@ body {
     transition: background-color 0.2s;
 }
 
-.navLinks:hover {
+.navLinks:hover,
+.navLinks.active {
     background-color: #1e293b;
 }
-a{
-    color:#cbd5e1;
-    text-decoration: none;
+
+.navLinks.active {
+    font-weight: bold;
 }
+
 .logout {
     color: #f43f5e;
     cursor: pointer;
     padding: 10px;
     border-radius: 5px;
 }
-.main-content {
-    flex: 1;
-    background-color: #f8fafc;
-    padding: 30px;
-    min-height: 100vh;
-}
 
+/* ===== MAIN CONTENT ===== */
 .header {
     display: flex;
     justify-content: space-between;
@@ -79,12 +92,14 @@ a{
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
+    transition: background-color 0.2s;
 }
 
 .add-btn:hover {
     background-color: #2563eb;
 }
 
+/* ===== TABLE STYLES ===== */
 .service-table {
     width: 100%;
     border-collapse: collapse;
@@ -107,7 +122,179 @@ a{
     color: #0f172a;
 }
 
-.navLinks.active {
-    background-color: #1e293b;
+.service-table td:nth-last-child(2),
+.service-table td:last-child {
+    padding: 8px;
+    text-align: center;
+}
+/* Thêm vào phần TABLE STYLES */
+.service-table img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+    margin: 0 auto;
+}
+/* ===== TABLE BUTTONS ===== */
+.service-table .edit-btn,
+.service-table .delete-btn {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    border: none;
+    margin: 2px;
+    transition: all 0.2s;
+    color: white;
+}
+
+.service-table .edit-btn {
+    background-color: #f59e0b;
+}
+
+.service-table .edit-btn:hover {
+    background-color: #d97706;
+}
+
+.service-table .delete-btn {
+    background-color: #ef4444;
+}
+
+.service-table .delete-btn:hover {
+    background-color: #dc2626;
+}
+
+/* ===== MODAL STYLES ===== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 350px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-title {
+    font-size: 18px;
     font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* ===== MODAL FORM ELEMENTS ===== */
+.modal-content input[type="text"],
+.modal-content textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.modal-content input[type="text"]:focus,
+.modal-content textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.modal-content textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+/* ===== MODAL BUTTONS ===== */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-actions button {
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.modal-actions .close-modal {
+    background-color: #f1f1f1;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.modal-actions .close-modal:hover {
+    background-color: #e0e0e0;
+}
+
+.modal-actions #saveServiceBtn,
+.modal-actions #confirmDelete {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+}
+
+.modal-actions #saveServiceBtn:hover,
+.modal-actions #confirmDelete:hover {
+    background-color: #2563eb;
+}
+
+/* ===== CONFIRM MODAL SPECIFIC ===== */
+.confirm-modal .modal-content {
+    text-align: center;
+}
+
+.confirm-modal .modal-title {
+    margin-bottom: 15px;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.confirm-modal p {
+    color: #555;
+    margin-bottom: 25px;
+    font-size: 15px;
+}
+
+.confirm-modal .modal-actions {
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.confirm-modal .modal-actions button {
+    min-width: 80px;
+}
+
+.confirm-modal .modal-actions .close-modal {
+    margin-right: 10px;
+}
+
+.confirm-modal .modal-actions #confirmDelete {
+    background-color: #ef4444;
+}
+
+.confirm-modal .modal-actions #confirmDelete:hover {
+    background-color: #dc2626;
 }
